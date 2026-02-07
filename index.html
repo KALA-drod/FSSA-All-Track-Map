@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All FSSA Track</title>
+    <style>
+        /* Menggunakan style dasar dari file aslimu */
+        body { margin: 0; background: #000; font-family: Arial, sans-serif; color: #fff; overflow-x: hidden; }
+        
+        .background-overlay {
+            position: fixed; inset: 0;
+            /* Ganti dengan URL gambar map-mu */
+            background: url('https://i.pinimg.com/1200x/28/28/fd/2828fdb7ff978e37ce2570889dc208d5.jpg') no-repeat center center;
+            background-size: cover; opacity: 0.3; z-index: 0; pointer-events: none;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            background: rgba(153, 0, 0, 0.8);
+            padding: 15px 25px;
+            border-bottom: 2px solid var(--neon-green);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .map-frame {
+            position: relative; width: min(95vw, 1000px); margin: 50px auto;
+            border: 2px solid rgba(0, 231, 200, 0.548); border-radius: 15px;
+            background: #007e6d; overflow: hidden; z-index: 2; aspect-ratio: 1 / 1;
+        }
+
+        .map-frame img#main-map { width: 100%; height: 100%; object-fit: contain; }
+
+        /* Animasi Pulse Titik */
+        .zone {
+            position: absolute; width: 30px; height: 30px; cursor: pointer;
+            animation: pulse 2s infinite ease-in-out; transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); filter: brightness(1); }
+            50% { transform: translate(-50%, -50%) scale(1.2); filter: brightness(1.5); }
+            100% { transform: translate(-50%, -50%) scale(1); filter: brightness(1); }
+        }
+
+        .zone img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* Info Box Style */
+        #info-box {
+            position: fixed; top: 50%; right: 20px; transform: translateY(-50%);
+            width: 250px; background: #0f1f1d; border: 2px solid #00ffcc;
+            padding: 15px; border-radius: 12px; display: none; z-index: 100;
+            box-shadow: 0 0 15px #00ffcc;
+        }
+
+        #info-box.active { display: block; }
+        #info-box img { width: 100%; border-radius: 8px; margin: 10px 0; border: 1px solid #444; }
+        .track-name { color: #fff200; font-weight: bold; text-align: center; font-size: 1.2rem; }
+        .details { font-size: 0.8rem; margin-top: 10px; }
+        .details div { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px solid #222; }
+    </style>
+</head>
+<body>
+
+    <div class="background-overlay"></div>
+
+    <div class="map-frame" id="map-container">
+        <img id="main-map" src="https://cdn.discordapp.com/attachments/1059673841053470750/1468785796617076860/allmap3.jpg.jpeg?ex=6987ebde&is=69869a5e&hm=19de362fdc46fe92333a58faf3a9da40d7b8d6914836ccbd64bc5907961cb89c&" alt="Street Map">
+
+        <div class="zone" onclick="showInfo(1, event)" style="top: 28.69%; left: 86.90%;">
+            <img src="https://i.pinimg.com/1200x/b9/3b/0c/b93b0c63848ec12835fd1c485d7189f0.jpg" alt="Logo">
+        </div>
+
+        <div class="zone" onclick="showInfo(2, event)" style="top: 37.83%; left: 53.22%;">
+            <img src="https://i.pinimg.com/736x/86/08/3b/86083bc4b2b3f2fab3a23876ce377787.jpg" alt="Logo">
+        </div>
+
+        <div class="zone" onclick="showInfo(3, event)" style="top: 44.38%; left: 71.97%;">
+            <img src="https://i.pinimg.com/736x/a6/8a/71/a68a71faf92067cc2b7a78480b249d98.jpg" alt="Logo">
+        </div>
+
+        <div class="zone" onclick="showInfo(4, event)" style="top: 14.16%; left: 87.93%;">
+            <img src="https://i.pinimg.com/736x/60/e1/2e/60e12ef8f91004862d6413b7f26f0b13.jpg" alt="Logo">
+        </div>
+        
+        <div class="zone" onclick="showInfo(5, event)" style="top: 21.84%; left: 95.31%;">
+            <img src="https://i.pinimg.com/1200x/e9/89/c5/e989c548fca12d740bb6b69cb44bbd2d.jpg" alt="Logo">
+        </div>
+
+        <div class="zone" onclick="showInfo(6, event)" style="top: 26.93%; left: 84.04%;">
+            <img src="https://i.pinimg.com/736x/9b/1d/3f/9b1d3fd2e4b200b2242338f64e8db936.jpg" alt="Logo">
+        </div>
+
+        <div class="zone" onclick="showInfo(7, event)" style="top: 40.49%; left: 6.55%;">
+            <img src="https://i.pinimg.com/736x/19/bc/d2/19bcd22b3ce3e2af5963dc93600d69e6.jpg" alt="Logo">
+        </div>
+
+        <div class="zone" onclick="showInfo(8, event)" style="top: 32.31%; left: 10.94%;">
+            <img src="https://i.pinimg.com/736x/c1/33/d1/c133d13bbdc107b55080984fbac5f440.jpg" alt="Logo">
+        </div>
+
+        <div class="zone" onclick="showInfo(9, event)" style="top: 49.47%; left: 12.53%;">
+            <img src="https://i.pinimg.com/736x/d7/a3/a8/d7a3a85cfa6a1c6d48b45fe3271b0655.jpg" alt="Logo">
+        </div>
+
+        <div class="zone" onclick="showInfo(10, event)" style="top: 51.26%; left: 5.05%;">
+            <img src="https://i.pinimg.com/736x/13/bd/6d/13bd6d5502f1ec11784b7ed4a3956c0b.jpg" alt="Logo">
+        </div>
+
+        <div class="zone" onclick="showInfo(11, event)" style="top: 32.31%; left: 23.60%;">
+            <img src="https://i.pinimg.com/736x/bf/cb/ef/bfcbef8b9a08abf55a507f47e736c12a.jpg" alt="Logo">
+        </div>
+
+        <div class="zone" onclick="showInfo(12, event)" style="top: 72.07%; left: 65.99%;">
+            <img src="https://i.pinimg.com/736x/13/bd/6d/13bd6d5502f1ec11784b7ed4a3956c0b.jpg" alt="Logo">
+        </div>
+
+        <div class="zone" onclick="showInfo(13, event)" style="top: 70.05%; left: 84.44%;">
+            <img src="https://i.pinimg.com/736x/38/c1/1e/38c11e8ee6facded1422907bde13c7c1.jpg" alt="Logo">
+        </div>
+
+        <div class="zone" onclick="showInfo(14, event)" style="top: 85.80%; left: 91.72%;">
+            <img src="https://i.pinimg.com/736x/e6/19/98/e619984abcb46bbb5ef067e48f4d329c.jpg" alt="Logo"> 
+        </div>
+
+        <div class="zone" onclick="showInfo(15,event)" style="top: 44.61%; left: 91.22%;">
+            <img src="https://i.pinimg.com/736x/2b/39/cc/2b39cc56b922b70e7dcf194acb2a1d08.jpg" alt="Logo">
+        </div>
+    </div>
+
+    <div id="info-box">
+        <div class="track-name" id="info-name">TRACK NAME</div>
+        <img id="info-track-img" src="" alt="Route">
+        <div class="details">
+            <div><span>Home Race:</span><strong id="info-club">-</strong></div>
+            <div><span>Record:</span><strong id="info-record">-</strong></div>
+            <div><span>Last Winner:</span><strong id="info-cash">-</strong></div>
+        </div>
+        <button onclick="document.getElementById('info-box').classList.remove('active')" style="width:100%; margin-top:10px; cursor:pointer;">CLOSE</button>
+    </div>
+
+    <script>
+        // Data yang muncul saat diklik
+        const zoneData = {
+            1: { name: "Camel District Circuit", club: "Qatar", record: "No Record", cash: "No Winner", track: "https://cdn.discordapp.com/attachments/1450846268774420500/1450846269391110184/Tak_berjudul61_20251217224403.png?ex=6987eaa2&is=69869922&hm=ddc1ccaddd318f2490fa985b5f9fa46dd727046435402369df0ad3775dfbbc6c&" },
+            2: { name: "Bone Riviera Circuit", club: "Monaco", record: "No Record", cash: "Nieekie Shikoku", track: "https://cdn.discordapp.com/attachments/1443461826817032294/1443461827731259503/Tak_berjudul54_20251126114819.png?ex=69876b55&is=698619d5&hm=d29e46ea2d378436e74b01606adddeb598b17b6f829645e4a0901b7423bf0c61&" },
+            3: { name: "Red Atlanta Autodromo", club: "Italian", record: "No Record", cash: "No Winner", track: "https://cdn.discordapp.com/attachments/1443769698771800074/1443769699660730520/Tak_berjudul54_20251128095751.png?ex=6987e150&is=69868fd0&hm=1df0478b817dc2fcfd2ce7b8dd218a50d716cf7666ce81b3c79560730bb3057b&" },
+            4: { name: "Strip Venturas Park", club: "British", record: "No Record", cash: "Jose William", track: "https://cdn.discordapp.com/attachments/1443458909309239436/1443458910186115155/Tak_berjudul54_20251123015651.png?ex=6987689e&is=6986171e&hm=9fa431153432791389f82d17046d264b56a3f624a7b3e7c9d8799bc635703589&" },
+            5: { name: "Julius Coastal Express Circuit", club: "South Korean", record: "No Record", cash: "No Winner", track: "https://cdn.discordapp.com/attachments/1455408423322783886/1455408423981027593/Tak_berjudul62_20251230124840.png?ex=69875ff8&is=69860e78&hm=d963678088c2035378275f5e809b09cb2103261dd0f7da5db2e2fe1bc46a83e2&" },
+            6: { name: "Strip Boulevard Circuit", club: "Saudi Arabia", record: "No Record", cash: "No Winner", track: "https://cdn.discordapp.com/attachments/1443460309636350116/1443460310391591012/Tak_berjudul54_20251125112509.png?ex=698769ec&is=6986186c&hm=e18805c439158db3563e43e94806d4bf8e53cf93ce88a29300eb41110302a133&" },
+            7: { name: "Oceanic Atlantic Circuit", club: "Spain", record: "01:28.88", cash: "Jose WIlliam", track: "https://cdn.discordapp.com/attachments/1455076500012273859/1455076500670910515/Tak_berjudul62_20251229145044.png?ex=69877c57&is=69862ad7&hm=9cd22a7fb90cb6fc2886f013c44f99a35b5db5a72277d1a2927d273b0d5e63e9&" },
+            8: { name: "Juniper Ring Montegi", club: "Japan", record: "01:18.28", cash: "Hans Schumacher", track: "https://cdn.discordapp.com/attachments/1454699649024659456/1454699649679233115/Tak_berjudul61_20251228135316.png?ex=69876edf&is=69861d5f&hm=fe1683ac05816301b41231215a05789043d31d886e30d7434087495c6e5e6908&" },
+            9: { name: "Circuit de San Fiero", club: "France", record: "01:22.19", cash: "Chevaliez Dickett", track: "https://cdn.discordapp.com/attachments/1454689972547358834/1454689973260386354/Tak_berjudul61_20251228131456.png?ex=698765dc&is=6986145c&hm=a2f146cdbb821323a3fcd677d79e208d83e9d71a09b291fda67163a38bb4515f&" },
+            10: { name: "Circuit Of The Fiero", club: "USA", record: "01:25.05", cash: "Hans Schumacher", track: "https://cdn.discordapp.com/attachments/1450846595988852776/1450846596756541582/Tak_berjudul61_20251217224329.png?ex=6987eaf0&is=69869970&hm=a5d57b93d04df7ecb94225207713d94e2b1c5c74f732d2857220d3bccb15fcb7&" },
+            11: { name: "Downtown Portside Circuit", club: "Singapore", record: "No Record", cash: "No Winner", track: "https://cdn.discordapp.com/attachments/1455395676077948999/1455395677168209940/Tak_berjudul62_20251230115718.png?ex=6987fcd9&is=6986ab59&hm=7843a24327ad8b3187aa6156b72360335c9d8ab28a7be76d287616cce652fe26&" },
+            12: { name: "Market Grand Avanue", club: "USA", record: "No Record", cash: "Samuel Theodore", track: "https://cdn.discordapp.com/attachments/1443460731189071882/1443460731856228435/Tak_berjudul54_20251125160543.png?ex=69876a50&is=698618d0&hm=0f6e3438ac00804045875d4f9371ed1cd2c09fef4ce61a55aa8962abdb9de7f0&" },
+            13: { name: "Jeffersonhein Ring", club: "Germany", record: "No Record", cash: "Kamoto Izumo", track: "https://cdn.discordapp.com/attachments/1445215119368781884/1445215120140800031/Tak_berjudul57_20251201164655.png?ex=6987dd77&is=69868bf7&hm=462f92f4e931272e9b16b90e4363d4746bdbe5c6d68c995bd775b70db90ab441&" },
+            14: { name: "Porto Oceânico", club: "Brazil", record: "No Record", cash: "Saito Akabe", track: "https://cdn.discordapp.com/attachments/1448246276557635704/1448246277681844224/Tak_berjudul54_20251210183053.png?ex=6987afb3&is=69865e33&hm=e583a0afa24b4db7c125994f8efb37c96eaa72663d5cc9fc446d880069952036&" },
+            15: { name: "Palomino Riverside Circuit", club: "Azerbaijan", cash: "Jose William", track: "https://cdn.discordapp.com/attachments/1448721402814271569/1448721403674099884/Tak_berjudul57_20251211113543.png?ex=69876ff2&is=69861e72&hm=4da83f3aeef6e45eedefcb4a0bf1f828252442761d65bda1731217e3ea1b4429&"}
+        };
+
+        function showInfo(id, event) {
+            event.stopPropagation();
+            const data = zoneData[id];
+            if (!data) return;
+
+            document.getElementById('info-name').textContent = data.name;
+            document.getElementById('info-club').textContent = data.club;
+            document.getElementById('info-record').textContent = data.record;
+            document.getElementById('info-cash').textContent = data.cash;
+            document.getElementById('info-track-img').src = data.track;
+
+            document.getElementById('info-box').classList.add('active');
+        }
+
+        // ALAT BANTU: Klik di mana saja pada peta untuk dapat koordinat!
+        document.getElementById('map-container').addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(2);
+            const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(2);
+            
+            console.log(`Top: ${y}%, Left: ${x}%`);
+            alert(`Koordinat untuk Titik Baru:\ntop: ${y}%;\nleft: ${x}%;`);
+        });
+    </script>
+</body>
+</html>
