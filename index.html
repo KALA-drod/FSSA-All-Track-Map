@@ -70,7 +70,7 @@
     <div class="background-overlay"></div>
 
     <div class="map-frame" id="map-container">
-        <img id="main-map" src="https://cdn.discordapp.com/attachments/1059673841053470750/1468785796617076860/allmap3.jpg.jpeg?ex=6987ebde&is=69869a5e&hm=19de362fdc46fe92333a58faf3a9da40d7b8d6914836ccbd64bc5907961cb89c&" alt="Street Map">
+        <img id="main-map" src="https://i.imgur.com/pAwK8Np.jpeg" alt="Street Map">
 
         <div class="zone" onclick="showInfo(1, event)" style="top: 28.69%; left: 86.90%;">
             <img src="https://i.pinimg.com/1200x/b9/3b/0c/b93b0c63848ec12835fd1c485d7189f0.jpg" alt="Logo">
@@ -131,6 +131,10 @@
         <div class="zone" onclick="showInfo(15,event)" style="top: 44.61%; left: 91.22%;">
             <img src="https://i.pinimg.com/736x/2b/39/cc/2b39cc56b922b70e7dcf194acb2a1d08.jpg" alt="Logo">
         </div>
+
+        <div class="zone" onclick="showInfo(16, event)" style="top: 16.26%; left: 79.65%;">
+            <img src="https://i.pinimg.com/736x/38/c1/1e/38c11e8ee6facded1422907bde13c7c1.jpg" alt="Logo">
+        </div>"
     </div>
 
     <div id="info-box">
@@ -147,21 +151,22 @@
     <script>
         // Data yang muncul saat diklik
         const zoneData = {
-            1: { name: "Camel District Circuit", club: "Qatar", record: "No Record", cash: "No Winner", track: "https://cdn.discordapp.com/attachments/1450846268774420500/1450846269391110184/Tak_berjudul61_20251217224403.png?ex=6987eaa2&is=69869922&hm=ddc1ccaddd318f2490fa985b5f9fa46dd727046435402369df0ad3775dfbbc6c&" },
-            2: { name: "Bone Riviera Circuit", club: "Monaco", record: "No Record", cash: "Nieekie Shikoku", track: "https://cdn.discordapp.com/attachments/1443461826817032294/1443461827731259503/Tak_berjudul54_20251126114819.png?ex=69876b55&is=698619d5&hm=d29e46ea2d378436e74b01606adddeb598b17b6f829645e4a0901b7423bf0c61&" },
-            3: { name: "Red Atlanta Autodromo", club: "Italian", record: "No Record", cash: "No Winner", track: "https://cdn.discordapp.com/attachments/1443769698771800074/1443769699660730520/Tak_berjudul54_20251128095751.png?ex=6987e150&is=69868fd0&hm=1df0478b817dc2fcfd2ce7b8dd218a50d716cf7666ce81b3c79560730bb3057b&" },
-            4: { name: "Strip Venturas Park", club: "British", record: "No Record", cash: "Jose William", track: "https://cdn.discordapp.com/attachments/1443458909309239436/1443458910186115155/Tak_berjudul54_20251123015651.png?ex=6987689e&is=6986171e&hm=9fa431153432791389f82d17046d264b56a3f624a7b3e7c9d8799bc635703589&" },
-            5: { name: "Julius Coastal Express Circuit", club: "South Korean", record: "No Record", cash: "No Winner", track: "https://cdn.discordapp.com/attachments/1455408423322783886/1455408423981027593/Tak_berjudul62_20251230124840.png?ex=69875ff8&is=69860e78&hm=d963678088c2035378275f5e809b09cb2103261dd0f7da5db2e2fe1bc46a83e2&" },
-            6: { name: "Strip Boulevard Circuit", club: "Saudi Arabia", record: "No Record", cash: "No Winner", track: "https://cdn.discordapp.com/attachments/1443460309636350116/1443460310391591012/Tak_berjudul54_20251125112509.png?ex=698769ec&is=6986186c&hm=e18805c439158db3563e43e94806d4bf8e53cf93ce88a29300eb41110302a133&" },
-            7: { name: "Oceanic Atlantic Circuit", club: "Spain", record: "01:28.88", cash: "Jose WIlliam", track: "https://cdn.discordapp.com/attachments/1455076500012273859/1455076500670910515/Tak_berjudul62_20251229145044.png?ex=69877c57&is=69862ad7&hm=9cd22a7fb90cb6fc2886f013c44f99a35b5db5a72277d1a2927d273b0d5e63e9&" },
-            8: { name: "Juniper Ring Montegi", club: "Japan", record: "01:18.28", cash: "Hans Schumacher", track: "https://cdn.discordapp.com/attachments/1454699649024659456/1454699649679233115/Tak_berjudul61_20251228135316.png?ex=69876edf&is=69861d5f&hm=fe1683ac05816301b41231215a05789043d31d886e30d7434087495c6e5e6908&" },
-            9: { name: "Circuit de San Fiero", club: "France", record: "01:22.19", cash: "Chevaliez Dickett", track: "https://cdn.discordapp.com/attachments/1454689972547358834/1454689973260386354/Tak_berjudul61_20251228131456.png?ex=698765dc&is=6986145c&hm=a2f146cdbb821323a3fcd677d79e208d83e9d71a09b291fda67163a38bb4515f&" },
-            10: { name: "Circuit Of The Fiero", club: "USA", record: "01:25.05", cash: "Hans Schumacher", track: "https://cdn.discordapp.com/attachments/1450846595988852776/1450846596756541582/Tak_berjudul61_20251217224329.png?ex=6987eaf0&is=69869970&hm=a5d57b93d04df7ecb94225207713d94e2b1c5c74f732d2857220d3bccb15fcb7&" },
-            11: { name: "Downtown Portside Circuit", club: "Singapore", record: "No Record", cash: "No Winner", track: "https://cdn.discordapp.com/attachments/1455395676077948999/1455395677168209940/Tak_berjudul62_20251230115718.png?ex=6987fcd9&is=6986ab59&hm=7843a24327ad8b3187aa6156b72360335c9d8ab28a7be76d287616cce652fe26&" },
-            12: { name: "Market Grand Avanue", club: "USA", record: "No Record", cash: "Samuel Theodore", track: "https://cdn.discordapp.com/attachments/1443460731189071882/1443460731856228435/Tak_berjudul54_20251125160543.png?ex=69876a50&is=698618d0&hm=0f6e3438ac00804045875d4f9371ed1cd2c09fef4ce61a55aa8962abdb9de7f0&" },
-            13: { name: "Jeffersonhein Ring", club: "Germany", record: "No Record", cash: "Kamoto Izumo", track: "https://cdn.discordapp.com/attachments/1445215119368781884/1445215120140800031/Tak_berjudul57_20251201164655.png?ex=6987dd77&is=69868bf7&hm=462f92f4e931272e9b16b90e4363d4746bdbe5c6d68c995bd775b70db90ab441&" },
-            14: { name: "Porto Oceânico", club: "Brazil", record: "No Record", cash: "Saito Akabe", track: "https://cdn.discordapp.com/attachments/1448246276557635704/1448246277681844224/Tak_berjudul54_20251210183053.png?ex=6987afb3&is=69865e33&hm=e583a0afa24b4db7c125994f8efb37c96eaa72663d5cc9fc446d880069952036&" },
-            15: { name: "Palomino Riverside Circuit", club: "Azerbaijan", cash: "Jose William", track: "https://cdn.discordapp.com/attachments/1448721402814271569/1448721403674099884/Tak_berjudul57_20251211113543.png?ex=69876ff2&is=69861e72&hm=4da83f3aeef6e45eedefcb4a0bf1f828252442761d65bda1731217e3ea1b4429&"}
+            1: { name: "Camel District Circuit", club: "Qatar", record: "No Record", cash: "No Winner", track: "https://i.imgur.com/KEskB9B.png" },
+            2: { name: "Bone Riviera Circuit", club: "Monaco", record: "No Record", cash: "Nieekie Shikoku", track: "https://i.imgur.com/7wN5PmP.jpeg" },
+            3: { name: "Red Atlanta Autodromo", club: "Italian", record: "No Record", cash: "No Winner", track: "https://i.imgur.com/aZjQ0m4.jpeg" },
+            4: { name: "Strip Venturas Park", club: "British", record: "No Record", cash: "Jose William", track: "https://i.imgur.com/Iwe68db.png" },
+            5: { name: "Julius Coastal Express Circuit", club: "South Korean", record: "No Record", cash: "No Winner", track: "https://i.imgur.com/rK34IHq.jpeg" },
+            6: { name: "Strip Boulevard Circuit", club: "Saudi Arabia", record: "No Record", cash: "No Winner", track: "https://i.imgur.com/s2KdCgE.png" },
+            7: { name: "Oceanic Atlantic Circuit", club: "Spain", record: "01:28.88", cash: "Jose WIlliam", track: "https://i.imgur.com/8rEM2Xn.png" },
+            8: { name: "Juniper Ring Montegi", club: "Japan", record: "01:18.28", cash: "Hans Schumacher", track: "https://i.imgur.com/9CTakmR.jpeg" },
+            9: { name: "Circuit de San Fiero", club: "France", record: "01:22.19", cash: "Chevaliez Dickett", track: "https://i.imgur.com/fGHC8F6.jpeg" },
+            10: { name: "Circuit Of The Fiero", club: "USA", record: "01:25.05", cash: "Hans Schumacher", track: "https://i.imgur.com/VNnySbc.png" },
+            11: { name: "Downtown Portside Circuit", club: "Singapore", record: "No Record", cash: "No Winner", track: "https://i.imgur.com/0mFdMm2.jpeg" },
+            12: { name: "Market Grand Avanue", club: "USA", record: "No Record", cash: "Samuel Theodore", track: "https://i.imgur.com/Lhmmty6.jpeg" },
+            13: { name: "Jeffersonhein Ring", club: "Germany", record: "No Record", cash: "Kamoto Izumo", track: "https://i.imgur.com/ymqXpjq.png" },
+            14: { name: "Porto Oceânico", club: "Brazil", record: "No Record", cash: "Saito Akabe", track: "https://i.imgur.com/GxlkOOg.png" },
+            15: { name: "Palomino Riverside Circuit", club: "Azerbaijan", cash: "Jose William", track: "https://i.imgur.com/SNE2EmH.jpeg"},
+            16: { name: "Venturing", club: "Germany", cash: "No Winner", track: "https://i.imgur.com/yFLGuth.jpeg"}
         };
 
         function showInfo(id, event) {
